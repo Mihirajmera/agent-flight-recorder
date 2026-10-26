@@ -32,6 +32,100 @@ The demo runs a scripted session for a release agent working through the GitHub 
 
 > [agent-access-review](https://github.com/Mihirajmera/agent-access-review) answers *what can this agent do?* This tool answers *what did it do?*
 
+## How it works
+
+```mermaid
+flowchart LR
+    subgraph CLIENT["🤖 Agent side"]
+        A["MCP client<br/>Claude Code, Claude Desktop, Cursor"]
+    end
+    subgraph AFR["⚙️ afr proxy"]
+        P{"Policy<br/>policy.yaml<br/>first match wins"}
+        AP[("Approvals<br/>bound to server + tool + args<br/>expire · single use")]
+        REC["Recorder<br/>hash chain + Ed25519"]
+    end
+    subgraph SRV["🧰 MCP server"]
+        S["GitHub, Slack,<br/>filesystem, shell"]
+    end
+    subgraph EVID["📤 Evidence"]
+        LOG[("flight.jsonl<br/>signed, append-only")]
+        RPT["afr report<br/>7 controls re-performed<br/>Markdown · CSV · OSCAL"]
+    end
+    H["👤 Approver<br/>afr approve"]
+    AUD["🔍 Auditor<br/>afr verify --pubkey --anchor"]
+    ANC[("Anchor<br/>head hash stored elsewhere")]
+
+    A -->|tools/call| P
+    P -->|allow| S
+    P -->|"deny: error back to agent"| A
+    P -->|"approve: held"| AP
+    H -->|"approves this exact call"| AP
+    AP -->|"used once"| S
+    S -->|result| A
+    P & AP & S -. every step .-> REC --> LOG
+    LOG --> RPT
+    AUD --> LOG
+    ANC -.-> AUD
+
+    classDef client fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
+    classDef core fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef data fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef output fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef person fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+    class A,S client
+    class P,REC core
+    class AP,LOG,ANC data
+    class RPT output
+    class H,AUD person
+```
+
+The agent and the server don't change. The proxy speaks MCP to both, so the agent sees the same tools, and the server sees only the calls the policy let through.
+
+### An approval, step by step
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Agent as 🤖 Agent
+    participant AFR as afr proxy
+    participant Log as flight.jsonl
+    participant Human as 👤 priya
+    participant GH as GitHub MCP server
+
+    Agent->>AFR: tools/call merge_pull_request PR 41
+    AFR->>Log: tool-call · decision approval-required · rule merges-need-a-human
+    AFR-->>Agent: isError: needs approval, request cc3118f9-1
+    Human->>AFR: afr approve cc3118f9-1 --approver priya
+    AFR->>Log: approval · bound to sha256(server, tool, args) · expires in 60 min
+    Agent->>AFR: tools/call merge_pull_request PR 41 (same arguments)
+    AFR->>Log: tool-call · decision approved · approval_entry 6:419c…
+    AFR->>GH: forwarded
+    GH-->>AFR: result
+    AFR->>Log: tool-result · ok · result sha256
+    AFR-->>Agent: result
+    Agent->>AFR: tools/call merge_pull_request PR 41 again
+    AFR->>Log: tool-call · approval-required (the approval was single-use)
+    AFR-->>Agent: isError: new request cc3118f9-2
+```
+
+### Why the log is tamper-evident
+
+```mermaid
+flowchart LR
+    E0["entry 0<br/>session-start<br/>prev: 000…0<br/>hash: 2f19…"] --> E1["entry 1<br/>tools-listed<br/>prev: 2f19…<br/>hash: 506a…"]
+    E1 --> E2["entry 2<br/>tool-call<br/>prev: 506a…<br/>hash: e542…"]
+    E2 --> EN["…"]
+    EN --> HEAD["entry 15<br/>session-end<br/>hash: 711f…"]
+    HEAD -. "afr verify prints the head;<br/>store it outside the system" .-> ANC[("Anchor<br/>15:711f…")]
+
+    classDef entry fill:#ede9fe,stroke:#7c3aed,color:#3b0764
+    classDef anchor fill:#fef3c7,stroke:#d97706,color:#78350f
+    class E0,E1,E2,EN,HEAD entry
+    class ANC anchor
+```
+
+Each entry stores the hash of the one before it and its own hash, and the recorder signs that hash with Ed25519. Editing, deleting or reordering any entry breaks every link after it. Without the private key, nobody can write a replacement chain that verifies. The anchor catches the one thing a chain can't: entries cut off the end.
+
 ## Run an MCP server behind the recorder
 
 Write a policy:
