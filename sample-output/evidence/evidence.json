@@ -1,0 +1,126 @@
+{
+  "hash_scope": "sha256 of canonical JSON of {log, summary, results}",
+  "log": {
+    "entries": 16,
+    "head": "15:711fe81addb8f148b815bb097a47a953b3291c529bccaadaeae7d4f2d2058e91",
+    "log_sha256": "32e81423ebf0bc80ea50b48390c7d070faf24b27a101e0a953851d196a80f1c4",
+    "path": "flight.jsonl"
+  },
+  "results": [
+    {
+      "check_id": "AFR-01",
+      "findings": [
+        {
+          "check_id": "AFR-01",
+          "entry": null,
+          "message": "No anchor was given, so removal of the most recent entries can't be ruled out. Store the head from `afr verify` outside this system.",
+          "severity": "low"
+        }
+      ],
+      "status": "NOTE",
+      "title": "The flight log is complete and unaltered"
+    },
+    {
+      "check_id": "AFR-02",
+      "findings": [],
+      "status": "PASS",
+      "title": "Every tool call is attributed to an agent and the person it acts for"
+    },
+    {
+      "check_id": "AFR-03",
+      "findings": [],
+      "status": "PASS",
+      "title": "Calls that need approval ran only with a valid, single-use human approval"
+    },
+    {
+      "check_id": "AFR-04",
+      "findings": [
+        {
+          "check_id": "AFR-04",
+          "entry": 11,
+          "message": "dana@example.com approved a delete_branch call that the agent made on their own behalf.",
+          "severity": "medium"
+        }
+      ],
+      "status": "FAIL",
+      "title": "Nobody approved an agent acting on their own behalf"
+    },
+    {
+      "check_id": "AFR-05",
+      "findings": [],
+      "status": "PASS",
+      "title": "Policy decisions were enforced"
+    },
+    {
+      "check_id": "AFR-06",
+      "findings": [
+        {
+          "check_id": "AFR-06",
+          "entry": 14,
+          "message": "Tool merge_pull_request on github changed its description since entry 1. Review what it now tells the agent.",
+          "severity": "medium"
+        }
+      ],
+      "status": "FAIL",
+      "title": "Tool definitions did not change without review"
+    },
+    {
+      "check_id": "AFR-07",
+      "findings": [],
+      "status": "PASS",
+      "title": "Every forwarded call has a recorded outcome"
+    }
+  ],
+  "sha256": "d3f6c20ac38d8db5bc13341508b3b331d3394596913e83ff7c346e5584ed1527",
+  "summary": {
+    "agents": [
+      "release-bot"
+    ],
+    "approvals": 2,
+    "by_tool": {
+      "delete_branch": {
+        "approval-required": 1,
+        "approved": 1
+      },
+      "get_pull_request": {
+        "allow": 1
+      },
+      "merge_pull_request": {
+        "approval-required": 2,
+        "approved": 1
+      },
+      "push_files": {
+        "deny": 1
+      }
+    },
+    "calls": 7,
+    "decisions": {
+      "allow": 1,
+      "approval-required": 3,
+      "approved": 2,
+      "deny": 1
+    },
+    "first": "2026-10-12T00:00:00.000Z",
+    "last": "2026-10-12T00:00:00.000Z",
+    "on_behalf_of": [
+      "dana@example.com"
+    ],
+    "servers": [
+      "github"
+    ],
+    "sessions": 1
+  },
+  "verification": {
+    "anchor_matched": null,
+    "bad_signatures": 0,
+    "chain_intact": true,
+    "entries": 16,
+    "head": "15:711fe81addb8f148b815bb097a47a953b3291c529bccaadaeae7d4f2d2058e91",
+    "log": "flight.jsonl",
+    "log_sha256": "32e81423ebf0bc80ea50b48390c7d070faf24b27a101e0a953851d196a80f1c4",
+    "ok": true,
+    "problems": [],
+    "signatures_checked": true,
+    "signed_entries": 16
+  }
+}

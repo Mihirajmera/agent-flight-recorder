@@ -1,0 +1,7 @@
+# Direct dependencies for development and CI. Edit this file, then regenerate the
+# hash-locked requirements.txt with:
+#   uv pip compile requirements.in --universal --generate-hashes --python-version 3.11 -o requirements.txt
+pyyaml==6.0.3
+cryptography==50.0.2
+pytest==9.1.1
+setuptools==84.0.0   # build backend, installed up front so `pip install --no-build-isolation .` needs nothing else

@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push: {branches: [main]}
+  pull_request: {}
+  workflow_dispatch: {}
+
+permissions: {contents: read}
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install --require-hashes -r requirements.txt
+
+      - name: Run tests
+        run: pytest -q
+
+      - name: Wheel ships the control catalog, example policy and console scripts
+        run: python scripts/check_wheel.py
+
+      # Run the demo and check that the committed sample-output/ is exactly what this version produces.
+      - name: Demo and sample output are current
+        env:
+          SOURCE_DATE_EPOCH: '1791763200'
+        run: |
+          python -m agent_flight_recorder demo --out sample-output
+          git diff --exit-code sample-output/
+          cat sample-output/evidence/flight-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: sample-flight-report
+          path: sample-output/

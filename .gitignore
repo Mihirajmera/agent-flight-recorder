@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.pytest_cache/
+# Flight logs, keys and evidence: never commit these
+.afr/
+afr-demo/
+afr-evidence/
+*.key
+*.lock
+dist/
+*.egg-info/
+build/

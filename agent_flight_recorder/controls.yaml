@@ -1,0 +1,57 @@
+# Control catalog. Each check re-performs one property of the flight log. Mappings are my own
+# judgment; verify them against the official texts before relying on them in an audit. EU AI
+# Act articles are listed where the log provides evidence relevant to them, not as a claim of
+# compliance.
+#
+# Frameworks: NIST SP 800-53 Rev. 5, AICPA TSC 2017 (rev. 2022), ISO/IEC 42001:2023 Annex A,
+# Regulation (EU) 2024/1689 (AI Act).
+
+controls:
+  AFR-01:
+    title: The flight log is complete and unaltered
+    nist_800_53: [AU-9, AU-9(3), AU-10]
+    soc2: [CC7.2]
+    iso_42001: [A.6.2.8]
+    eu_ai_act: [Art. 12]
+
+  AFR-02:
+    title: Every tool call is attributed to an agent and the person it acts for
+    nist_800_53: [AU-3]
+    soc2: [CC7.2]
+    iso_42001: [A.6.2.8]
+    eu_ai_act: [Art. 12]
+
+  AFR-03:
+    title: Calls that need approval ran only with a valid, single-use human approval
+    nist_800_53: [AC-3, AC-6]
+    soc2: [CC6.1, CC8.1]
+    iso_42001: []
+    eu_ai_act: [Art. 14]
+
+  AFR-04:
+    title: Nobody approved an agent acting on their own behalf
+    nist_800_53: [AC-5]
+    soc2: [CC6.3]
+    iso_42001: []
+    eu_ai_act: [Art. 14]
+
+  AFR-05:
+    title: Policy decisions were enforced
+    nist_800_53: [AC-3]
+    soc2: [CC6.1]
+    iso_42001: []
+    eu_ai_act: []
+
+  AFR-06:
+    title: Tool definitions did not change without review
+    nist_800_53: [CM-3, SI-7]
+    soc2: [CC8.1]
+    iso_42001: []
+    eu_ai_act: []
+
+  AFR-07:
+    title: Every forwarded call has a recorded outcome
+    nist_800_53: [AU-12]
+    soc2: [CC7.2]
+    iso_42001: [A.6.2.8]
+    eu_ai_act: [Art. 12]

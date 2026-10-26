@@ -1,0 +1,54 @@
+{
+  "8db5abff-1": {
+    "agent": "release-bot",
+    "approval_entry": "11:1c0adc09e829c706aa296f6ee96676b61aae57e64d41c50a8228f0c062e1ed64",
+    "approver": "dana@example.com",
+    "arguments": {
+      "branch": "feature/41",
+      "owner": "acme",
+      "repo": "api"
+    },
+    "decided_at": "2026-10-12T00:00:00.000Z",
+    "expires": "2026-10-12T01:00:00.000Z",
+    "on_behalf_of": "dana@example.com",
+    "request_key": "8db5abff95010ce6fb2339507f17fadaa891d9272b847124de4d8d27046e6bb4",
+    "requested_at": "2026-10-12T00:00:00.000Z",
+    "server": "github",
+    "status": "used",
+    "tool": "delete_branch",
+    "used_at": "2026-10-12T00:00:00.000Z"
+  },
+  "cc3118f9-1": {
+    "agent": "release-bot",
+    "approval_entry": "6:419cfe985a8e2040bd20842af2306682dcb62109d6bcac1c553ca650a18a0cb4",
+    "approver": "priya@example.com",
+    "arguments": {
+      "owner": "acme",
+      "pull_number": 41,
+      "repo": "api"
+    },
+    "decided_at": "2026-10-12T00:00:00.000Z",
+    "expires": "2026-10-12T01:00:00.000Z",
+    "on_behalf_of": "dana@example.com",
+    "request_key": "cc3118f9421e28acb1f16d411e384f802f37c33afbc65d15ae62eaa733ec609d",
+    "requested_at": "2026-10-12T00:00:00.000Z",
+    "server": "github",
+    "status": "used",
+    "tool": "merge_pull_request",
+    "used_at": "2026-10-12T00:00:00.000Z"
+  },
+  "cc3118f9-2": {
+    "agent": "release-bot",
+    "arguments": {
+      "owner": "acme",
+      "pull_number": 41,
+      "repo": "api"
+    },
+    "on_behalf_of": "dana@example.com",
+    "request_key": "cc3118f9421e28acb1f16d411e384f802f37c33afbc65d15ae62eaa733ec609d",
+    "requested_at": "2026-10-12T00:00:00.000Z",
+    "server": "github",
+    "status": "pending",
+    "tool": "merge_pull_request"
+  }
+}

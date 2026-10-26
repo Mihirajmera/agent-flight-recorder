@@ -1,0 +1,260 @@
+{
+  "assessment-results": {
+    "uuid": "ff40455a-0d04-5706-9373-6fb7ae72f906",
+    "metadata": {
+      "title": "AI agent activity review (flight log)",
+      "last-modified": "2026-10-12T00:00:00.000Z",
+      "version": "15:711fe81addb8f148b815bb097a47a953b3291c529bccaadaeae7d4f2d2058e91",
+      "oscal-version": "1.1.2"
+    },
+    "import-ap": {
+      "href": "#"
+    },
+    "results": [
+      {
+        "uuid": "1594ab6d-164d-5473-96d5-95cbd3c33f35",
+        "title": "Re-performance of an agent flight log",
+        "description": "7 tool calls, 2 approvals, 16 log entries.",
+        "start": "2026-10-12T00:00:00.000Z",
+        "end": "2026-10-12T00:00:00.000Z",
+        "reviewed-controls": {
+          "control-selections": [
+            {
+              "include-controls": [
+                {
+                  "control-id": "ac-3"
+                },
+                {
+                  "control-id": "ac-5"
+                },
+                {
+                  "control-id": "ac-6"
+                },
+                {
+                  "control-id": "au-10"
+                },
+                {
+                  "control-id": "au-12"
+                },
+                {
+                  "control-id": "au-3"
+                },
+                {
+                  "control-id": "au-9"
+                },
+                {
+                  "control-id": "au-9.3"
+                },
+                {
+                  "control-id": "cm-3"
+                },
+                {
+                  "control-id": "si-7"
+                }
+              ]
+            }
+          ]
+        },
+        "observations": [
+          {
+            "uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2",
+            "title": "Flight log re-performance",
+            "methods": [
+              "EXAMINE",
+              "TEST"
+            ],
+            "description": "Hash chain, signatures, approvals and policy enforcement re-checked from the log.",
+            "types": [
+              "finding"
+            ],
+            "relevant-evidence": [
+              {
+                "href": "../evidence.json",
+                "description": "Hashed evidence summary",
+                "props": [
+                  {
+                    "name": "sha256",
+                    "value": "d3f6c20ac38d8db5bc13341508b3b331d3394596913e83ff7c346e5584ed1527"
+                  }
+                ]
+              }
+            ],
+            "collected": "2026-10-12T00:00:00.000Z"
+          }
+        ],
+        "findings": [
+          {
+            "uuid": "5a07064d-3a64-5c89-99d9-3b070e8dd246",
+            "title": "AC-3: AFR-03, AFR-05",
+            "description": "Calls that need approval ran only with a valid, single-use human approval; Policy decisions were enforced",
+            "target": {
+              "type": "objective-id",
+              "target-id": "ac-3",
+              "status": {
+                "state": "satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "6ececb63-dd82-5e31-aa5e-91224d566313",
+            "title": "AC-5: AFR-04",
+            "description": "Nobody approved an agent acting on their own behalf",
+            "target": {
+              "type": "objective-id",
+              "target-id": "ac-5",
+              "status": {
+                "state": "not-satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "f54d5db6-9399-58bd-95b6-1f9b15e0591a",
+            "title": "AC-6: AFR-03",
+            "description": "Calls that need approval ran only with a valid, single-use human approval",
+            "target": {
+              "type": "objective-id",
+              "target-id": "ac-6",
+              "status": {
+                "state": "satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "647d4b50-dfe9-515f-996f-438343286072",
+            "title": "AU-10: AFR-01",
+            "description": "The flight log is complete and unaltered",
+            "target": {
+              "type": "objective-id",
+              "target-id": "au-10",
+              "status": {
+                "state": "satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "875c1bd8-d89e-5dfb-a065-46e2a0dd65aa",
+            "title": "AU-12: AFR-07",
+            "description": "Every forwarded call has a recorded outcome",
+            "target": {
+              "type": "objective-id",
+              "target-id": "au-12",
+              "status": {
+                "state": "satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "ac624d24-0863-554e-9c1e-80003e5c21aa",
+            "title": "AU-3: AFR-02",
+            "description": "Every tool call is attributed to an agent and the person it acts for",
+            "target": {
+              "type": "objective-id",
+              "target-id": "au-3",
+              "status": {
+                "state": "satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "067901e8-a238-5572-827a-19d9696a3643",
+            "title": "AU-9: AFR-01",
+            "description": "The flight log is complete and unaltered",
+            "target": {
+              "type": "objective-id",
+              "target-id": "au-9",
+              "status": {
+                "state": "satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "c04b3cf2-8335-58cb-93a4-02a4601e0acb",
+            "title": "AU-9(3): AFR-01",
+            "description": "The flight log is complete and unaltered",
+            "target": {
+              "type": "objective-id",
+              "target-id": "au-9.3",
+              "status": {
+                "state": "satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "45065f0e-2869-5e16-a3ec-2a60f6714fef",
+            "title": "CM-3: AFR-06",
+            "description": "Tool definitions did not change without review",
+            "target": {
+              "type": "objective-id",
+              "target-id": "cm-3",
+              "status": {
+                "state": "not-satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          },
+          {
+            "uuid": "f73df7bd-ea47-50cc-9783-d53be349f40b",
+            "title": "SI-7: AFR-06",
+            "description": "Tool definitions did not change without review",
+            "target": {
+              "type": "objective-id",
+              "target-id": "si-7",
+              "status": {
+                "state": "not-satisfied"
+              }
+            },
+            "related-observations": [
+              {
+                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

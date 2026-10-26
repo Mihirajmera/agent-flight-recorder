@@ -1,0 +1,29 @@
+version: 2
+updates:
+  # One grouped PR for all actions, so multi-part actions (codeql init/analyze) never
+  # end up at mismatched versions; only releases at least 14 days old are proposed.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: {interval: weekly}
+    cooldown: {default-days: 14}
+    groups:
+      github-actions:
+        patterns: ["*"]
+
+  # requirements.txt is hash-locked and compiled for Python 3.11 from requirements.in with
+  # uv, which Dependabot can't reproduce. Version-update PRs are off; security updates still
+  # arrive, and the lock file is regenerated with the command in requirements.in.
+  - package-ecosystem: pip
+    directory: /
+    schedule: {interval: weekly}
+    open-pull-requests-limit: 0
+
+  - package-ecosystem: docker
+    directory: /.clusterfuzzlite
+    schedule: {interval: weekly}
+    cooldown: {default-days: 14}
+
+  - package-ecosystem: pip
+    directory: /.clusterfuzzlite
+    schedule: {interval: weekly}
+    open-pull-requests-limit: 0

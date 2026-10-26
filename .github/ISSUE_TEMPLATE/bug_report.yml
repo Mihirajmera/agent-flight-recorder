@@ -1,0 +1,19 @@
+name: Bug report
+description: A check fired when it shouldn't, a call got through that shouldn't have, or the tool crashed
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes: {label: Version, description: Output of agent-flight-recorder --version}
+    validations: {required: true}
+  - type: textarea
+    id: input
+    attributes:
+      label: Log, policy or messages that reproduce it
+      description: The smallest flight log, policy or JSON-RPC message sequence that shows the problem. Remove real secrets first.
+      render: yaml
+    validations: {required: true}
+  - type: textarea
+    id: expected
+    attributes: {label: What you expected, description: "Which check, and what should it have said?"}
+    validations: {required: true}

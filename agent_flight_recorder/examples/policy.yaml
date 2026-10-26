@@ -1,0 +1,25 @@
+# Policy for a release agent that works through the GitHub MCP server.
+agent: release-bot
+on_behalf_of: env:USER                 # the person running the agent
+default: approve                       # anything not listed needs a human
+record_arguments: redacted             # digest | redacted | full
+approval_ttl_minutes: 60
+
+rules:
+  - id: read-only
+    tools: ["get_*", "list_*", "search_*"]
+    decision: allow
+
+  - id: no-push-to-protected
+    tools: ["push_files", "create_or_update_file"]
+    when: {arg: branch, matches: "^(main|master|release/.*)$"}
+    decision: deny
+    reason: Agents don't write to protected branches; open a pull request instead.
+
+  - id: pull-requests
+    tools: ["create_pull_request", "push_files", "create_or_update_file"]
+    decision: allow
+
+  - id: merges-need-a-human
+    tools: ["merge_pull_request", "delete_*"]
+    decision: approve
