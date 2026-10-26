@@ -1,5 +1,12 @@
 # agent-flight-recorder
 
+[![Tests](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/tests.yml/badge.svg)](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/tests.yml)
+[![CodeQL](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/codeql.yml/badge.svg)](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/codeql.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Mihirajmera/agent-flight-recorder/badge)](https://scorecard.dev/viewer/?uri=github.com/Mihirajmera/agent-flight-recorder)
+[![Fuzzing: ClusterFuzzLite](https://img.shields.io/badge/fuzzing-ClusterFuzzLite-blue)](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/cflite_batch.yml)
+![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 **A flight recorder for AI agents: what did the agent actually do, who let it, and can you prove it?**
 
 AI agents now call tools that merge code, move money and delete data. When something goes wrong, or an auditor asks, most teams can show what the agent *could* do (its permissions) but not what it *did*: which person it was acting for, which tool it called with which arguments, what the policy said, and who approved the risky step. Ordinary application logs can't answer that well, because whoever runs the agent can also edit the logs.
