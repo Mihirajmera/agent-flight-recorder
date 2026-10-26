@@ -35,48 +35,39 @@ The demo runs a scripted session for a release agent working through the GitHub 
 ## How it works
 
 ```mermaid
-flowchart LR
-    subgraph CLIENT["🤖 Agent side"]
-        A["MCP client<br/>Claude Code, Claude Desktop, Cursor"]
-    end
+flowchart TB
+    A["🤖 MCP client<br/>Claude Code, Claude Desktop, Cursor"]
     subgraph AFR["⚙️ afr proxy"]
-        P{"Policy<br/>policy.yaml<br/>first match wins"}
-        AP[("Approvals<br/>bound to server + tool + args<br/>expire · single use")]
-        REC["Recorder<br/>hash chain + Ed25519"]
-    end
-    subgraph SRV["🧰 MCP server"]
-        S["GitHub, Slack,<br/>filesystem, shell"]
-    end
-    subgraph EVID["📤 Evidence"]
-        LOG[("flight.jsonl<br/>signed, append-only")]
-        RPT["afr report<br/>7 controls re-performed<br/>Markdown · CSV · OSCAL"]
+        direction TB
+        P{"Policy decision<br/>policy.yaml · first match wins"}
+        D["deny<br/>error returned to the agent"]
+        Q["approve<br/>held until a human approves"]
+        OK["allow<br/>or approved, once"]
+        P --> D
+        P --> Q
+        P --> OK
+        Q -->|"approval bound to<br/>server + tool + arguments"| OK
     end
     H["👤 Approver<br/>afr approve"]
-    AUD["🔍 Auditor<br/>afr verify --pubkey --anchor"]
-    ANC[("Anchor<br/>head hash stored elsewhere")]
-
+    S["🧰 MCP server<br/>GitHub, Slack, filesystem, shell"]
+    LOG[("flight.jsonl<br/>hash-chained · Ed25519-signed")]
+    RPT["afr verify · afr report<br/>7 controls · Markdown · CSV · OSCAL"]
     A -->|tools/call| P
-    P -->|allow| S
-    P -->|"deny: error back to agent"| A
-    P -->|"approve: held"| AP
-    H -->|"approves this exact call"| AP
-    AP -->|"used once"| S
-    S -->|result| A
-    P & AP & S -. every step .-> REC --> LOG
+    H --> Q
+    OK -->|forwarded| S
+    AFR -. "every decision, approval and result" .-> LOG
     LOG --> RPT
-    AUD --> LOG
-    ANC -.-> AUD
 
     classDef client fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
     classDef core fill:#ede9fe,stroke:#7c3aed,color:#3b0764
-    classDef data fill:#fef3c7,stroke:#d97706,color:#78350f
-    classDef output fill:#dcfce7,stroke:#16a34a,color:#14532d
-    classDef person fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+    classDef deny fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+    classDef gate fill:#fef3c7,stroke:#d97706,color:#78350f
+    classDef ok fill:#dcfce7,stroke:#16a34a,color:#14532d
     class A,S client
-    class P,REC core
-    class AP,LOG,ANC data
-    class RPT output
-    class H,AUD person
+    class P core
+    class D deny
+    class Q,H,LOG gate
+    class OK,RPT ok
 ```
 
 The agent and the server don't change. The proxy speaks MCP to both, so the agent sees the same tools, and the server sees only the calls the policy let through.
