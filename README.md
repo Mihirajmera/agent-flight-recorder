@@ -3,6 +3,7 @@
 [![Tests](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/tests.yml/badge.svg)](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/tests.yml)
 [![CodeQL](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/codeql.yml/badge.svg)](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/codeql.yml)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/Mihirajmera/agent-flight-recorder/badge)](https://scorecard.dev/viewer/?uri=github.com/Mihirajmera/agent-flight-recorder)
+[![PyPI](https://img.shields.io/pypi/v/multiagent-flight-recorder)](https://pypi.org/project/multiagent-flight-recorder/)
 [![Fuzzing: ClusterFuzzLite](https://img.shields.io/badge/fuzzing-ClusterFuzzLite-blue)](https://github.com/Mihirajmera/agent-flight-recorder/actions/workflows/cflite_batch.yml)
 ![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
