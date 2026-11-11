@@ -207,7 +207,7 @@ def verify(log: Path, public_key_path: Path | None = None, anchor: str | None = 
         try:
             a_seq, a_hash = anchor.split(':', 1)
             a = int(a_seq)
-            anchor_ok = a < len(entries) and entries[a].get('hash') == a_hash
+            anchor_ok = 0 <= a < len(entries) and entries[a].get('hash') == a_hash
         except ValueError:
             anchor_ok = False
         if not anchor_ok:
