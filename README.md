@@ -18,7 +18,7 @@ AI agents now call tools that merge code, move money and delete data. When somet
 3. **Turns the log into audit evidence.** `afr report` re-checks the chain and signatures and re-performs seven controls against the log. It then writes a reviewer report, a CSV of every call, hashed evidence JSON and OSCAL assessment results.
 
 ```bash
-pip install git+https://github.com/Mihirajmera/agent-flight-recorder
+pip install multiagent-flight-recorder
 afr demo
 ```
 

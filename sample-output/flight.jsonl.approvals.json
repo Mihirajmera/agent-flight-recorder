@@ -1,7 +1,7 @@
 {
   "8db5abff-1": {
     "agent": "release-bot",
-    "approval_entry": "11:1c0adc09e829c706aa296f6ee96676b61aae57e64d41c50a8228f0c062e1ed64",
+    "approval_entry": "11:30f5902e0b32132334fd08a554c10d14de8be74e56616a8354b80bf4c01280a3",
     "approver": "dana@example.com",
     "arguments": {
       "branch": "feature/41",
@@ -20,7 +20,7 @@
   },
   "cc3118f9-1": {
     "agent": "release-bot",
-    "approval_entry": "6:419cfe985a8e2040bd20842af2306682dcb62109d6bcac1c553ca650a18a0cb4",
+    "approval_entry": "6:2fd6ca31ae321a1d8f8f986666fec7788fd9ae1d2e354ee69098304df231d4aa",
     "approver": "priya@example.com",
     "arguments": {
       "owner": "acme",

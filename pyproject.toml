@@ -3,8 +3,8 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mcp-flight-recorder"
-version = "0.1.0"
+name = "multiagent-flight-recorder"
+version = "0.2.0"
 description = "Audit-grade flight recorder for AI agents: policy on every MCP tool call, a signed hash-chained log, and OSCAL evidence"
 readme = "README.md"
 requires-python = ">=3.11"

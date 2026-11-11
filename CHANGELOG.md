@@ -1,14 +1,13 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 (2026-11-11)
 
+- First release on PyPI, as `multiagent-flight-recorder`: `agent-flight-recorder` and `mcp-flight-recorder` were already taken. The repository, the `agent_flight_recorder` import and the `afr` / `agent-flight-recorder` commands keep their names.
 - `afr proxy --http-upstream URL`: puts a remote MCP server (Streamable HTTP) behind the same policy, approvals and log. JSON and SSE responses are both recorded. Request headers are forwarded but never logged, the upstream URL is logged without its query string, the proxy listens only on loopback and rejects non-local `Origin` headers, and it does not follow redirects (#6).
 
 ## 0.1.0 (2026-10-26)
 
 First release.
-
-- Published to PyPI as `mcp-flight-recorder`, because the name `agent-flight-recorder` belongs to an unrelated project. The repository, the `agent_flight_recorder` import and the `afr` / `agent-flight-recorder` commands keep their names.
 
 - `afr proxy`: wraps any stdio MCP server and applies a YAML policy to every `tools/call`. The policy can allow, deny, or require approval, with first-match rules on tool name patterns, server and argument regexes. It fails closed if the call can't be recorded.
 - Approvals bound to the exact call (server, tool, arguments), with an expiry, single use, and the approver recorded in the log (`afr pending`, `afr approve`).

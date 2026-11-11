@@ -1,10 +1,10 @@
 {
   "assessment-results": {
-    "uuid": "ff40455a-0d04-5706-9373-6fb7ae72f906",
+    "uuid": "ace8951c-bed3-597e-b2bd-28d4cd52f667",
     "metadata": {
       "title": "AI agent activity review (flight log)",
       "last-modified": "2026-10-12T00:00:00.000Z",
-      "version": "15:711fe81addb8f148b815bb097a47a953b3291c529bccaadaeae7d4f2d2058e91",
+      "version": "15:fb82444db4f0a284cd14130d10d5da54ae11d99f76a3224dac23033873624779",
       "oscal-version": "1.1.2"
     },
     "import-ap": {
@@ -57,7 +57,7 @@
         },
         "observations": [
           {
-            "uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2",
+            "uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3",
             "title": "Flight log re-performance",
             "methods": [
               "EXAMINE",
@@ -74,7 +74,7 @@
                 "props": [
                   {
                     "name": "sha256",
-                    "value": "d3f6c20ac38d8db5bc13341508b3b331d3394596913e83ff7c346e5584ed1527"
+                    "value": "12844aa9b7e144762de74778e72a7263eee1bd8eeb2930ef76784566ba9a346c"
                   }
                 ]
               }
@@ -96,7 +96,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -113,7 +113,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -130,7 +130,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -147,7 +147,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -164,7 +164,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -181,7 +181,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -198,7 +198,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -215,7 +215,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -232,7 +232,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           },
@@ -249,7 +249,7 @@
             },
             "related-observations": [
               {
-                "observation-uuid": "fdf4edf3-d8fe-5a3c-b889-ae1b315176b2"
+                "observation-uuid": "d96f06cd-572a-5f36-ad8b-72f2a49453a3"
               }
             ]
           }

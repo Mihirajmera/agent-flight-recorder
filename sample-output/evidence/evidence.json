@@ -2,8 +2,8 @@
   "hash_scope": "sha256 of canonical JSON of {log, summary, results}",
   "log": {
     "entries": 16,
-    "head": "15:711fe81addb8f148b815bb097a47a953b3291c529bccaadaeae7d4f2d2058e91",
-    "log_sha256": "32e81423ebf0bc80ea50b48390c7d070faf24b27a101e0a953851d196a80f1c4",
+    "head": "15:fb82444db4f0a284cd14130d10d5da54ae11d99f76a3224dac23033873624779",
+    "log_sha256": "aa2264262129fb63362e8119cfef2584e2a2a6823812664cc41dcad34d60a3eb",
     "path": "flight.jsonl"
   },
   "results": [
@@ -71,7 +71,7 @@
       "title": "Every forwarded call has a recorded outcome"
     }
   ],
-  "sha256": "d3f6c20ac38d8db5bc13341508b3b331d3394596913e83ff7c346e5584ed1527",
+  "sha256": "12844aa9b7e144762de74778e72a7263eee1bd8eeb2930ef76784566ba9a346c",
   "summary": {
     "agents": [
       "release-bot"
@@ -115,9 +115,9 @@
     "bad_signatures": 0,
     "chain_intact": true,
     "entries": 16,
-    "head": "15:711fe81addb8f148b815bb097a47a953b3291c529bccaadaeae7d4f2d2058e91",
+    "head": "15:fb82444db4f0a284cd14130d10d5da54ae11d99f76a3224dac23033873624779",
     "log": "flight.jsonl",
-    "log_sha256": "32e81423ebf0bc80ea50b48390c7d070faf24b27a101e0a953851d196a80f1c4",
+    "log_sha256": "aa2264262129fb63362e8119cfef2584e2a2a6823812664cc41dcad34d60a3eb",
     "ok": true,
     "problems": [],
     "signatures_checked": true,
