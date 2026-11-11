@@ -4,7 +4,7 @@ updates:
   # end up at mismatched versions; only releases at least 14 days old are proposed.
   - package-ecosystem: github-actions
     directory: /
-    schedule: {interval: weekly}
+    schedule: {interval: monthly}
     cooldown: {default-days: 14}
     groups:
       github-actions:
@@ -15,15 +15,15 @@ updates:
   # arrive, and the lock file is regenerated with the command in requirements.in.
   - package-ecosystem: pip
     directory: /
-    schedule: {interval: weekly}
+    schedule: {interval: monthly}
     open-pull-requests-limit: 0
 
   - package-ecosystem: docker
     directory: /.clusterfuzzlite
-    schedule: {interval: weekly}
+    schedule: {interval: monthly}
     cooldown: {default-days: 14}
 
   - package-ecosystem: pip
     directory: /.clusterfuzzlite
-    schedule: {interval: weekly}
+    schedule: {interval: monthly}
     open-pull-requests-limit: 0
