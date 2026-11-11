@@ -185,6 +185,25 @@ afr approve 3f9c2a1b-1 --approver priya@example.com --log .afr/release-bot.jsonl
 
 The agent's next identical call goes through once. A call with different arguments, a second retry, or a retry after the TTL needs a new approval.
 
+### Remote servers (Streamable HTTP)
+
+For an MCP server reached by URL, run the proxy as a local endpoint and point the client at it instead of the server:
+
+```bash
+afr proxy --policy policy.yaml --key afr-signing.key --http-upstream https://api.githubcopilot.com/mcp/ --listen 127.0.0.1:8765
+```
+
+```json
+{
+  "mcpServers": {
+    "github": {"type": "http", "url": "http://127.0.0.1:8765/mcp",
+               "headers": {"Authorization": "Bearer ${GITHUB_PAT}"}}
+  }
+}
+```
+
+The policy, approvals and log work the same way. Headers the client sends, including `Authorization`, go to the upstream and are never written to the log; the log records the upstream URL without its query string or userinfo. The proxy only listens on loopback, rejects requests whose `Origin` is not local (so a web page can't use it), and doesn't follow redirects, so a token goes only to the URL you configured. Clients that sign in with OAuth discovery may not accept the local URL; pass a token in a header instead.
+
 ## Verify and report
 
 ```bash
@@ -225,7 +244,7 @@ Each check is mapped to NIST SP 800-53, SOC 2, ISO/IEC 42001 Annex A and the EU 
 
 - **Truncation needs an anchor.** A hash chain shows edits, deletions and reordering in the middle of a log, but someone who can write the file can cut entries off the end. Store the `Head:` from `afr verify` somewhere the agent's operator can't change it (a ticket, a WORM bucket, a separate system), and pass it as `--anchor`. Reports without an anchor say so.
 - **One signing key per log.** Whoever holds the private key can write a new, valid log. Keep the key away from the agent's host, or rotate it per session. Hardware or KMS-backed signing would be the next step.
-- **stdio only.** It wraps MCP servers that speak JSON-RPC over stdin and stdout, which covers most local servers. Streamable HTTP servers aren't supported yet.
+- **stdio and Streamable HTTP.** The older HTTP+SSE transport (separate `/sse` and `/messages` endpoints) isn't supported, and OAuth discovery through the proxy isn't either: give the client a token header.
 - **It sees the tool calls, not the model.** Prompts, reasoning and anything the agent does outside MCP (its own shell, direct API calls) are out of view. Pair it with sandboxing for those.
 - **Approvals are command-line.** `afr approve` records who approved and when, but it trusts the `--approver` you type. In production, run approvals through a system that authenticates the approver and calls `afr approve` for them.
 
