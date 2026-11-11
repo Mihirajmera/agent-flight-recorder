@@ -3,6 +3,7 @@
   afr demo [--out afr-demo]                       a recorded session, its evidence, and a tampered copy
   afr keygen --out signing                        Ed25519 key pair for signing the log
   afr proxy --policy policy.yaml [--log FILE] [--key signing.key] [--server-name NAME] -- <server command>
+  afr proxy --policy policy.yaml --http-upstream https://... [--listen 127.0.0.1:8765] [--log FILE] [--key ...]
   afr pending [--log FILE]                        calls waiting for approval
   afr approve <request-id> --approver NAME [--log FILE] [--reject] [--note TEXT] [--ttl MINUTES]
   afr verify --log FILE [--pubkey signing.pub] [--anchor SEQ:HASH]
@@ -15,10 +16,12 @@ import json
 import shutil
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
 
 from . import __version__, approvals
 from .chain import Recorder, Signer, generate_key, read, verify
 from .policy import PolicyError, load
+from .http_proxy import HttpProxy, serve
 from .proxy import Session, default_log, run
 from .report import SEVERITY_ORDER, assess, write_all
 
@@ -42,6 +45,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument('--log', type=Path, help='flight log (default: .afr/<agent>.jsonl)')
     p.add_argument('--key', type=Path, help='private key from `afr keygen`; signs every entry')
     p.add_argument('--server-name', default=None, help='label for this server in the log (default: command name)')
+    p.add_argument('--http-upstream', metavar='URL',
+                   help='a remote MCP server (Streamable HTTP): the agent connects to --listen instead')
+    p.add_argument('--listen', default='127.0.0.1:8765', help='local address for --http-upstream (default 127.0.0.1:8765)')
     p.add_argument('command', nargs=argparse.REMAINDER, help='-- followed by the MCP server command')
 
     pe = sub.add_parser('pending', help='list calls waiting for approval')
@@ -82,8 +88,8 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.cmd == 'proxy':
         command = args.command[1:] if args.command[:1] == ['--'] else args.command
-        if not command:
-            ap.error('give the MCP server command after --')
+        if bool(command) == bool(args.http_upstream):
+            ap.error('give either the MCP server command after --, or --http-upstream URL')
         try:
             policy = load(args.policy)
         except (PolicyError, OSError) as exc:
@@ -91,6 +97,15 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         signer = Signer(args.key) if args.key else None
         recorder = Recorder(args.log or default_log(policy), signer)
+        if args.http_upstream:
+            host, _, port = args.listen.rpartition(':')
+            try:
+                proxy = HttpProxy(Session(policy, recorder, args.server_name or urlsplit(args.http_upstream).hostname or 'remote'),
+                                  args.http_upstream)
+                return serve(proxy, host.strip('[]') or '127.0.0.1', int(port), signer.key_id if signer else None)
+            except ValueError as exc:
+                print(f'proxy: {exc}', file=sys.stderr)
+                return 2
         server = args.server_name or Path(command[-1] if command[0] in ('npx', 'uvx', 'docker') else command[0]).name
         return run(Session(policy, recorder, server), command, signer.key_id if signer else None)
     if args.cmd == 'pending':

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- `afr proxy --http-upstream URL`: puts a remote MCP server (Streamable HTTP) behind the same policy, approvals and log. JSON and SSE responses are both recorded. Request headers are forwarded but never logged, the upstream URL is logged without its query string, the proxy listens only on loopback and rejects non-local `Origin` headers, and it does not follow redirects (#6).
+
 ## 0.1.0 (2026-10-26)
 
 First release.
