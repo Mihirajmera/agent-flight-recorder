@@ -8,6 +8,8 @@
 
 First release.
 
+- Published to PyPI as `mcp-flight-recorder`, because the name `agent-flight-recorder` belongs to an unrelated project. The repository, the `agent_flight_recorder` import and the `afr` / `agent-flight-recorder` commands keep their names.
+
 - `afr proxy`: wraps any stdio MCP server and applies a YAML policy to every `tools/call`. The policy can allow, deny, or require approval, with first-match rules on tool name patterns, server and argument regexes. It fails closed if the call can't be recorded.
 - Approvals bound to the exact call (server, tool, arguments), with an expiry, single use, and the approver recorded in the log (`afr pending`, `afr approve`).
 - Tamper-evident log: SHA-256 hash chain, optional Ed25519 signature on every entry, a cross-process lock so the proxy and approvers share one chain, and anchors to detect truncation (`afr keygen`, `afr verify`).
