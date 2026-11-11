@@ -51,6 +51,16 @@ def test_truncation_needs_an_anchor(tmp_path):
     assert not res['ok'] and res['anchor_matched'] is False
 
 
+
+def test_a_negative_or_malformed_anchor_is_reported_not_raised(tmp_path):
+    log = tmp_path / 'f.jsonl'
+    write(log)
+    last = verify(log)['head'].split(':', 1)[1]
+    for anchor in ('-99:abc', f'-1:{last}', 'x:abc', 'no-colon'):
+        res = verify(log, anchor=anchor)
+        assert res['anchor_matched'] is False and not res['ok'], anchor
+
+
 def test_signatures(tmp_path):
     priv, pub = generate_key(tmp_path / 'k')
     other_priv, other_pub = generate_key(tmp_path / 'other')
