@@ -9,8 +9,8 @@
 - **Entries:** 16, chain intact
 - **Signatures:** 16 signed entries; all verified
 - **Anchor:** none given
-- **Log file sha256:** `32e81423ebf0bc80ea50b48390c7d070faf24b27a101e0a953851d196a80f1c4`
-- **Head (store this elsewhere to detect truncation):** `15:711fe81addb8f148b815bb097a47a953b3291c529bccaadaeae7d4f2d2058e91`
+- **Log file sha256:** `aa2264262129fb63362e8119cfef2584e2a2a6823812664cc41dcad34d60a3eb`
+- **Head (store this elsewhere to detect truncation):** `15:fb82444db4f0a284cd14130d10d5da54ae11d99f76a3224dac23033873624779`
 
 ## Decisions
 
@@ -48,7 +48,7 @@
 | 6 | 2026-10-12T00:00:00.000Z | merge_pull_request | dana@example.com | priya@example.com | approved | 2026-10-12T01:00:00.000Z |
 | 11 | 2026-10-12T00:00:00.000Z | delete_branch | dana@example.com | dana@example.com | approved | 2026-10-12T01:00:00.000Z |
 
-Evidence: `evidence.json` (sha256 `d3f6c20ac38d8db5…`). Every call, with its hashes, is in `calls.csv`.
+Evidence: `evidence.json` (sha256 `12844aa9b7e14476…`). Every call, with its hashes, is in `calls.csv`.
 
 ## Sign-off
 
