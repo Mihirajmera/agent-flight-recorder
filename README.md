@@ -40,6 +40,8 @@ The demo runs a scripted session for a release agent working through the GitHub 
 
 > [agent-access-review](https://github.com/Mihirajmera/agent-access-review) answers *what can this agent do?* This tool answers *what did it do?*
 
+[![The sample report this tool produces, from sample-output/evidence/flight-report.md](docs/report.png)](sample-output/evidence/flight-report.md)
+
 ## How it works
 
 ```mermaid
