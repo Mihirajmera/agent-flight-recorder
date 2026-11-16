@@ -1,0 +1,17 @@
+$ afr demo
+Recorded a sample session: flight.jsonl
+
+AFR-01  LOW     1 finding(s)
+AFR-02  PASS    0 finding(s)
+AFR-03  PASS    0 finding(s)
+AFR-04  MEDIUM  1 finding(s)
+AFR-05  PASS    0 finding(s)
+AFR-06  MEDIUM  1 finding(s)
+AFR-07  PASS    0 finding(s)
+
+Report:   afr-demo/evidence/flight-report.md
+Calls:    afr-demo/evidence/calls.csv
+OSCAL:    afr-demo/evidence/oscal/assessment-results.json
+
+Tampered copy (one "deny" changed to "allow"): chain BROKEN
+  - entry 4: content does not match its hash (edited after it was written)
